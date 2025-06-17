@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const destinations = [
-  { name: "Malatipatapur bus stand", latitude: 19.862466, longitude: 85.835728, people: "tourist", vehicleType: "bus", capacity: 500, vacant: 300 },
+  { name: "Malatipatapur bus stand", latitude: 19.862466, longitude: 85.835728, people: "tourist", vehicleType: "bus", capacity: 500, vacant: 100 },
   { name: "Nagapatana", latitude: 19.834664, longitude: 85.879662, people: "tourist", vehicleType: "bus", capacity: 500, vacant: 300 },
   { name: "Talabania parking", latitude: 19.811516, longitude: 85.849319, people: "regular", vehicleType: "bus", capacity: 1100, vacant: 850 },
   { name: "Yatrika Parking", latitude: 19.790777, longitude: 85.808508, people: "nopass", vehicleType: "car", capacity: 1000, vacant: 700 },
