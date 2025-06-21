@@ -38,6 +38,78 @@ app.put("/api/parking/:id", async (req, res) => {
   res.json(updated);
 });
 
+// Create a new Conjestion record
+app.post('/api/conjestion', async (req, res) => {
+  const {
+    checkPointName,
+    inFlow,
+    outFlow,
+    netFlow,
+    thresold,
+    colorCode,
+    status
+  } = req.body;
+
+  try {
+    const result = await prisma.conjestion.create({
+      data: {
+        checkPointName,
+        inFlow,
+        outFlow,
+        netFlow,
+        thresold,
+        colorCode,
+        status
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get all records
+app.get('/api/conjestion', async (req, res) => {
+  const records = await prisma.conjestion.findMany();
+  res.json(records);
+});
+
+// Get one record by ID
+app.get('/api/conjestion/:id', async (req, res) => {
+  const { id } = req.params;
+  const record = await prisma.conjestion.findUnique({ where: { id: parseInt(id) } });
+  if (!record) return res.status(404).json({ error: 'Not found' });
+  res.json(record);
+});
+
+// Update a record
+app.put('/api/conjestion/:id', async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  try {
+    const updated = await prisma.conjestion.update({
+      where: { id: parseInt(id) },
+      data,
+    });
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete a record
+app.delete('/api/conjestion/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await prisma.conjestion.delete({ where: { id: parseInt(id) } });
+    res.json({ message: 'Deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Realtime WebSocket handling
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);

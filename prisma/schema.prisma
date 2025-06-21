@@ -18,3 +18,15 @@ model ParkingSpot {
   vacant       Int
   updatedAt    DateTime @updatedAt
 }
+
+model Conjestion {
+  id              Int      @id @default(autoincrement())
+  checkPointName String
+  inFlow          Int
+  outFlow         Int
+  netFlow         Int
+  thresold        Int
+  colorCode       String
+  status          String
+  timestamp       DateTime @updatedAt
+}
