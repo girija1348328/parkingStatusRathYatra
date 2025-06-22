@@ -6,17 +6,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model ParkingSpot {
-  id           Int     @id @default(autoincrement())
-  name         String
-  latitude     Float
-  longitude    Float
-  people       String
-  vehicleType  String
-  capacity     Int
-  vacant       Int
-  updatedAt    DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  latitude    Float
+  longitude   Float
+  people      String
+  vehicleType String
+  capacity    Int
+  occupied    Int?     // Optional, since some records may not have it
+  vacant      Int?     // Optional, since some records may not have it
+  colorCode   String?  // Optional, not all have it
+  updatedAt   DateTime @updatedAt
 }
 
 model Conjestion {
